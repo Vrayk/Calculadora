@@ -34,11 +34,14 @@ public class Operations {
 	}
 	
 
-	public void guardaMemoria() {
-		if(this.memoriaDisponible) {
+	public boolean guardaMemoria() {
+		if(this.memoriaDisponible&&this.resultado.length()>0) {
 			this.memoria.append(this.resultado.toString());
 			this.memoriaDisponible=false;
+			return true;
 		}
+		else
+			return false;
 	}
 	public void agregaMemo() {
 		this.resultado.append(this.memoria.toString());
@@ -93,8 +96,9 @@ public class Operations {
 			this.display.append(valor);	
 			return true;
 		}
-		else
+		else {
 			return false;
+			}
 	}
 
 	private boolean operador(String valor) {
@@ -126,6 +130,18 @@ public class Operations {
 		}
 		
 	}
+	public String getDisplay() {
+		return display.toString();
+	}
+
+	public String getResultado() {
+		return resultado.toString();
+	}
+
+	public String getMemoria() {
+		return memoria.toString();
+	}
+
 	private boolean calculoPosible() {
 		if (operadores.size()==0)
 			return false;

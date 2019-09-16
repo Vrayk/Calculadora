@@ -43,6 +43,7 @@ public class Window {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(0, 51, 51));
@@ -53,100 +54,82 @@ public class Window {
 		JButton bTn1 = new JButton("1");
 		bTn1.setBounds(10, 269, 55, 40);
 		frame.getContentPane().add(bTn1);
-		bTn1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("1");
-				visor();
-			}
-		});
+		numeros(bTn1, "1");
 		
 		JButton bTn2 = new JButton("2");
 		bTn2.setBounds(70, 269, 55, 40);
 		frame.getContentPane().add(bTn2);
-		bTn2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("2");
-				visor();
-			}
-		});
+		numeros(bTn2,"2");
 		
 		JButton bTn3 = new JButton("3");
 		bTn3.setBounds(130, 269, 55, 40);
 		frame.getContentPane().add(bTn3);
-		bTn3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("3");
-				visor();
-			}
-		});
+		numeros(bTn3,"3");
 		
 		JButton bTn4 = new JButton("4");
 		bTn4.setBounds(10, 215, 55, 40);
 		frame.getContentPane().add(bTn4);
-		bTn4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("4");
-				visor();
-			}
-		});
+		numeros(bTn4,"4");
 		
 		JButton bTn5 = new JButton("5");
 		bTn5.setBounds(70, 215, 55, 40);
 		frame.getContentPane().add(bTn5);
-		bTn5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("5");
-				visor();
-			}
-		});
+		numeros(bTn5,"5");
 		
 		JButton bTn6 = new JButton("6");
 		bTn6.setBounds(130, 215, 55, 40);
 		frame.getContentPane().add(bTn6);
-		bTn6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("6");
-				visor();
-			}
-		});
+		numeros(bTn6,"6");
 		
 		JButton bTn7 = new JButton("7");
 		bTn7.setBounds(10, 164, 55, 40);
 		frame.getContentPane().add(bTn7);
-		bTn7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("7");
-				visor();
-			}
-		});
+		numeros(bTn7,"7");
 		
 		JButton bTn8 = new JButton("8");
 		bTn8.setBounds(70, 164, 55, 40);
 		frame.getContentPane().add(bTn8);
-		bTn8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("8");
-				visor();
-			}
-		});
+		numeros(bTn8,"8");
 		
 		JButton bTn9 = new JButton("9");
 		bTn9.setBounds(130, 164, 55, 40);
 		frame.getContentPane().add(bTn9);
-		bTn9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("9");
-				visor();
-			}
-		});
+		numeros(bTn9,"9");
 		
 		JButton bTn0 = new JButton("0");
 		bTn0.setBounds(10, 320, 55, 40);
 		frame.getContentPane().add(bTn0);
-		bTn0.addActionListener(new ActionListener() {
+		numeros(bTn0,"0");
+		
+		JButton  bTnSuma = new JButton("+");
+		bTnSuma.setBounds(190, 269, 55, 91);
+		frame.getContentPane().add(bTnSuma);
+		operadores(bTnSuma, "+");
+		
+		JButton bTnResta = new JButton("-");
+		bTnResta.setBounds(190, 215, 55, 40);
+		frame.getContentPane().add(bTnResta);
+		operadores(bTnResta, "-");
+		
+		JButton bTnMult = new JButton("*");
+		bTnMult.setBounds(190, 164, 55, 40);
+		frame.getContentPane().add(bTnMult);
+		operadores(bTnMult, "*");
+
+		JButton bTnDiv = new JButton("/");
+		bTnDiv.setBounds(190, 113, 55, 40);
+		frame.getContentPane().add(bTnDiv);
+		operadores(bTnDiv, "/");
+
+		JButton bTnIgual = new JButton("=");
+		bTnIgual.setBounds(130, 320, 55, 40);
+		frame.getContentPane().add(bTnIgual);
+		bTnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor("0");
-				visor();
+				if(!funciones.calcular())
+					resultado.setText("0");
+				else
+					visor();
 			}
 		});
 		
@@ -172,74 +155,6 @@ public class Window {
 			}
 		});
 		
-		JButton  bTnSuma = new JButton("+");
-		bTnSuma.setBounds(190, 269, 55, 91);
-		frame.getContentPane().add(bTnSuma);
-		bTnSuma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(funciones.addValor("+")) {
-					visor();
-					resultado.setText("0");
-				}
-				else
-					resultado.setText("0");
-			}
-		});
-		
-		JButton bTnResta = new JButton("-");
-		bTnResta.setBounds(190, 215, 55, 40);
-		frame.getContentPane().add(bTnResta);
-		bTnResta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(funciones.addValor("-")) {
-					visor();
-					resultado.setText("0");
-				}
-				else
-					resultado.setText("0");
-			}
-		});
-		
-		JButton bTnMult = new JButton("*");
-		bTnMult.setBounds(190, 164, 55, 40);
-		frame.getContentPane().add(bTnMult);
-		bTnMult.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(funciones.addValor("*")) {
-					visor();
-					resultado.setText("0");
-				}
-				else
-					resultado.setText("0");
-			}
-		});
-
-		JButton bTnDiv = new JButton("/");
-		bTnDiv.setBounds(190, 113, 55, 40);
-		frame.getContentPane().add(bTnDiv);
-		bTnDiv.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(funciones.addValor("/")) {
-					visor();
-					resultado.setText("0");
-				}
-				else
-					resultado.setText("0");
-			}
-		});
-
-		JButton bTnIgual = new JButton("=");
-		bTnIgual.setBounds(130, 320, 55, 40);
-		frame.getContentPane().add(bTnIgual);
-		bTnIgual.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(!funciones.calcular())
-					resultado.setText("0");
-				else
-					visor();
-			}
-		});
-		
 		JButton bTnPunto = new JButton(".");
 		bTnPunto.setBounds(70, 320, 55, 40);
 		frame.getContentPane().add(bTnPunto);
@@ -252,12 +167,6 @@ public class Window {
 				else
 					resultado.setText("0");	
 			}
-		});
-		bTnPunto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-					//funciones.memoria();
-					visor();
-				}
 		});
 		
 		JButton bTnDeshacer = new JButton("Deshacer");
@@ -315,9 +224,28 @@ public class Window {
 		resultado.setForeground(new Color(255, 255, 255));
 		resultado.setHorizontalAlignment(SwingConstants.RIGHT);
 		resultado.setBounds(10, 26, 215, 14);
-		panel.add(resultado);
-
-		
+		panel.add(resultado);	
+	}
+	
+	public void numeros(JButton num, String numero) {
+		num.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				funciones.addValor(numero);
+				visor();
+			}
+		});
+	}
+	public void operadores(JButton op, String operador) {
+		op.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(funciones.addValor(operador)) {
+					visor();
+					resultado.setText("0");
+				}
+				else
+					resultado.setText("0");
+			}
+		});
 	}
 	private void visor() {
 		display.setText(funciones.display.toString());
