@@ -104,9 +104,9 @@ public class Operations {
 			return false;
 	}
 	public void deshacer() {
-		if(this.finCalculo) {
-			if(operandos.size()>=2) {
-				operandos.remove(operandos.get(operandos.size()-1));
+		if(operandos.size()>=2&&this.finCalculo) {
+			operandos.remove(operandos.get(operandos.size()-1));
+			if(operadores.size()>=1) {
 				operadores.remove(operadores.get(operadores.size()-1));
 				this.display.setLength(0);
 				this.display.append(operandos.get(0));
@@ -114,14 +114,17 @@ public class Operations {
 					this.display.append(operadores.get(i));
 					this.display.append(operandos.get(i+1));
 				}
-				calcular();
 			}
-			if (operandos.size()==1) {
-				this.resultado.setLength(0);
-				this.resultado.append(operandos.get(0));
-			}
+			calcular();
 		}
-			
+		else
+			this.finCalculo=false;
+		
+		if(this.operandos.size()==1){
+			this.resultado.setLength(0);
+			this.resultado.append(operandos.get(0));
+		}
+		
 	}
 	private boolean calculoPosible() {
 		if (operadores.size()==0)
