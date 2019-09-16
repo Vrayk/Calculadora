@@ -12,11 +12,9 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 public class Window {
-
 	private JFrame frame;
 	private JLabel display;
 	private JLabel resultado;
-	private boolean bloqOperador;
 	Operations funciones;
 	/**
 	 * Launch the application.
@@ -40,7 +38,6 @@ public class Window {
 	public Window() {
 		initialize();
 		funciones = new Operations();
-		bloqOperador=true;
 	}
 
 	/**
@@ -54,35 +51,32 @@ public class Window {
 		frame.getContentPane().setLayout(null);
 		
 		JButton bTn1 = new JButton("1");
-		bTn1.setBounds(10, 266, 55, 40);
+		bTn1.setBounds(10, 269, 55, 40);
 		frame.getContentPane().add(bTn1);
 		bTn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("1");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
 		JButton bTn2 = new JButton("2");
-		bTn2.setBounds(70, 266, 55, 40);
+		bTn2.setBounds(70, 269, 55, 40);
 		frame.getContentPane().add(bTn2);
 		bTn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("2");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
 		JButton bTn3 = new JButton("3");
-		bTn3.setBounds(130, 266, 55, 40);
+		bTn3.setBounds(130, 269, 55, 40);
 		frame.getContentPane().add(bTn3);
 		bTn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("3");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -93,7 +87,6 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("4");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -104,7 +97,6 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("5");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -115,7 +107,6 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("6");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -126,7 +117,6 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("7");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -137,7 +127,6 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("8");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -148,18 +137,16 @@ public class Window {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("9");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
 		JButton bTn0 = new JButton("0");
-		bTn0.setBounds(10, 317, 55, 40);
+		bTn0.setBounds(10, 320, 55, 40);
 		frame.getContentPane().add(bTn0);
 		bTn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				funciones.addValor("0");
 				visor();
-				bloqOperador=false;
 			}
 		});
 		
@@ -171,7 +158,6 @@ public class Window {
 				display.setText("0");
 				resultado.setText("0");
 				funciones.vaciarTodo();
-				bloqOperador=false;
 			}
 		});
 		
@@ -180,102 +166,135 @@ public class Window {
 		frame.getContentPane().add(bTnC);
 		bTnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				resultado.setText("0");
 				funciones.vaciar();
+				visor();
+				resultado.setText("0");
 			}
 		});
 		
 		JButton  bTnSuma = new JButton("+");
-		bTnSuma.setBounds(190, 266, 55, 91);
+		bTnSuma.setBounds(190, 269, 55, 91);
 		frame.getContentPane().add(bTnSuma);
 		bTnSuma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!bloqOperador)
-					funciones.addValor("+");
-				visor();
-				resultado.setText("0");
-				bloqOperador=true;
+				if(funciones.addValor("+")) {
+					visor();
+					resultado.setText("0");
+				}
+				else
+					resultado.setText("0");
 			}
 		});
 		
 		JButton bTnResta = new JButton("-");
 		bTnResta.setBounds(190, 215, 55, 40);
 		frame.getContentPane().add(bTnResta);
-		if(!bloqOperador) {
 		bTnResta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!bloqOperador)
-					funciones.addValor("-");
-				visor();
-				resultado.setText("0");
-				bloqOperador=true;
+				if(funciones.addValor("-")) {
+					visor();
+					resultado.setText("0");
+				}
+				else
+					resultado.setText("0");
 			}
 		});
-		}
+		
 		JButton bTnMult = new JButton("*");
 		bTnMult.setBounds(190, 164, 55, 40);
 		frame.getContentPane().add(bTnMult);
-		if(!bloqOperador) {
 		bTnMult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!bloqOperador)
-					funciones.addValor("*");
-				visor();
-				resultado.setText("0");
-				bloqOperador=true;
+				if(funciones.addValor("*")) {
+					visor();
+					resultado.setText("0");
+				}
+				else
+					resultado.setText("0");
 			}
 		});
-		}
+
 		JButton bTnDiv = new JButton("/");
 		bTnDiv.setBounds(190, 113, 55, 40);
 		frame.getContentPane().add(bTnDiv);
 		bTnDiv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!bloqOperador)
-					funciones.addValor("/");
-				visor();
-				resultado.setText("0");
-				bloqOperador=true;
+				if(funciones.addValor("/")) {
+					visor();
+					resultado.setText("0");
+				}
+				else
+					resultado.setText("0");
 			}
 		});
 
 		JButton bTnIgual = new JButton("=");
-		bTnIgual.setBounds(130, 317, 55, 40);
+		bTnIgual.setBounds(130, 320, 55, 40);
 		frame.getContentPane().add(bTnIgual);
 		bTnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				funciones.calcular();
-				visor();
-				bloqOperador=true;
+				if(!funciones.calcular())
+					resultado.setText("0");
+				else
+					visor();
 			}
 		});
 		
 		JButton bTnPunto = new JButton(".");
-		bTnPunto.setBounds(70, 317, 55, 40);
+		bTnPunto.setBounds(70, 320, 55, 40);
 		frame.getContentPane().add(bTnPunto);
 		bTnPunto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				funciones.addValor(".");
-				visor();
-				bloqOperador=false;
+				if(funciones.addValor(".")) {
+					visor();
+					resultado.setText("0");
+				}
+				else
+					resultado.setText("0");	
 			}
 		});
-		JButton btnMR = new JButton("MR");
-		btnMR.setBounds(10, 113, 55, 40);
-		frame.getContentPane().add(btnMR);
+		bTnPunto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					//funciones.memoria();
+					visor();
+				}
+		});
 		
-		JButton btnMmas = new JButton("M+");
-		btnMmas.setBounds(70, 113, 55, 40);
-		frame.getContentPane().add(btnMmas);
+		JButton bTnDeshacer = new JButton("Deshacer");
+		bTnDeshacer.setBounds(130, 62, 115, 40);
+		frame.getContentPane().add(bTnDeshacer);
+		bTnDeshacer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				funciones.deshacer();
+				visor();
+			}
+		});
 		
-		JButton btnMmenos= new JButton("M-");
-		btnMmenos.setBounds(130, 113, 55, 40);
-		frame.getContentPane().add(btnMmenos);
-		
-		JButton btnDeshacer = new JButton("Deshacer");
-		btnDeshacer.setBounds(130, 62, 115, 40);
-		frame.getContentPane().add(btnDeshacer);
-		
+		JButton bTnMR = new JButton("MR");
+		bTnMR.setBounds(10, 113, 55, 40);
+		frame.getContentPane().add(bTnMR);
+		bTnMR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				funciones.guardaMemoria();
+			}
+		});
+		JButton bTnMAdd = new JButton("M+");
+		bTnMAdd.setBounds(70, 113, 55, 40);
+		frame.getContentPane().add(bTnMAdd);
+		bTnMAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				funciones.agregaMemo();
+				visor();
+			}
+		});
+		JButton bTnMRemove = new JButton("M-");
+		bTnMRemove.setBounds(130, 113, 55, 40);
+		frame.getContentPane().add(bTnMRemove);
+		bTnMRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				funciones.borraMemo();
+			}
+		});
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
 		panel.setBounds(10, 11, 235, 40);
@@ -297,6 +316,7 @@ public class Window {
 		resultado.setHorizontalAlignment(SwingConstants.RIGHT);
 		resultado.setBounds(10, 26, 215, 14);
 		panel.add(resultado);
+
 		
 	}
 	private void visor() {
