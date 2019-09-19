@@ -8,7 +8,7 @@ public class Operations {
 	private boolean finCalculo;
 	public StringBuilder memoria;
 	private boolean coma;
-	private boolean memoriaDisponible;
+	public boolean memoriaDisponible;
 	public Operations() {
 		operandos = new ArrayList<>();
 		operadores = new ArrayList<>();
@@ -21,8 +21,10 @@ public class Operations {
 	}
 	
 	public void vaciar() {
-		this.display.delete(this.display.length()-this.resultado.length(), this.display.length());
-		this.resultado.setLength(0);
+		if(this.display.length()>0) {
+			this.display.delete(this.display.length()-this.resultado.length(), this.display.length());
+			this.resultado.setLength(0);
+		}
 	}
 	
 	public void vaciarTodo() {
@@ -35,7 +37,8 @@ public class Operations {
 	
 
 	public boolean guardaMemoria() {
-		if(this.memoriaDisponible&&this.resultado.length()>0) {
+		if((this.memoriaDisponible) && (this.resultado.length()>0) &&
+			(this.resultado.charAt(this.resultado.length()-1)!='.')) {
 			this.memoria.append(this.resultado.toString());
 			this.memoriaDisponible=false;
 			return true;
@@ -123,23 +126,10 @@ public class Operations {
 		}
 		else
 			this.finCalculo=false;
-		
 		if(this.operandos.size()==1){
 			this.resultado.setLength(0);
 			this.resultado.append(operandos.get(0));
 		}
-		
-	}
-	public String getDisplay() {
-		return display.toString();
-	}
-
-	public String getResultado() {
-		return resultado.toString();
-	}
-
-	public String getMemoria() {
-		return memoria.toString();
 	}
 
 	private boolean calculoPosible() {
@@ -152,6 +142,7 @@ public class Operations {
 		else
 			return true;
 	}
+	
 	double operando1, operando2;
 	public boolean calcular() {
 		if(calculoPosible()) {
@@ -172,11 +163,13 @@ public class Operations {
 			this.resultado.append(Double.toString(operando1));
 			nroEntero(operando1);
 			this.finCalculo=true;
+			System.out.println(this.resultado.toString());
 			return true;
 		}
 		else
 			return false;
 	}
+	
 	int entero;
 	private void nroEntero(double operando) {
 		if(this.resultado.charAt(this.resultado.length()-1)==('0') &&	//En caso de no tener decimales convierte a entero

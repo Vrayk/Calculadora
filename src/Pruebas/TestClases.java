@@ -1,34 +1,117 @@
 package Pruebas;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.junit.jupiter.api.Test;
 import functions.*;
 class TestClases {
 	
 	@Test
-	void primerAdicion() {
+	void operacionBasica() {
 		Operations funciones = new Operations();
-		funciones.addValor("+");						//No se puede agregar operadores ni comas
-		assertEquals(false, funciones.addValor("."));	//como primer operando, por lo que el display
-		assertEquals(0, funciones.display.length());	//esta vacio.
-	}
-	@Test
-	void operadorYcoma() {
-		Operations funciones = new Operations();
-		funciones.addValor("1");
-		funciones.addValor(".");						//No es posible concatenar operadores despues
-		assertEquals(false, funciones.addValor("."));	//de una coma o si ya se agrego una previamente,
-		assertEquals(false, funciones.addValor("+"));	//debe esperar un operando
-		funciones.addValor("1");
-		assertEquals(true, funciones.addValor("+"));
+		funciones.addValor("2");
+		funciones.addValor("2");
+		funciones.addValor("+");
+		funciones.addValor("5");
+		funciones.addValor("7");
+		funciones.calcular();
+		assertEquals("79", funciones.resultado.toString());
 	}
 	
 	@Test
-	void memoria(){
+	void multiplesOperaciones() {
 		Operations funciones = new Operations();
-		assertEquals(false, funciones.guardaMemoria());	//No permite guardar memoria en caso de estar
-		funciones.addValor("1");						//vacio.
-		assertEquals(true, funciones.guardaMemoria());
+		funciones.addValor("2");
+		funciones.addValor("+");
+		funciones.addValor("5");
+		funciones.addValor("+");
+		funciones.addValor("7");
+		funciones.addValor("-");
+		funciones.addValor("1");
+		funciones.calcular();
+		assertEquals("13", funciones.resultado.toString());
 	}
+	@Test
+	void vaciar() {
+		Operations funciones = new Operations();
+		funciones.addValor("1");
+		funciones.addValor("2");
+		funciones.vaciar();
+		assertEquals(0, funciones.resultado.length());
+	}
+	
+	@Test
+	void vaciarTodo() {
+		Operations funciones = new Operations();
+		funciones.addValor("1");
+		funciones.addValor("+");
+		funciones.addValor("2");
+		funciones.vaciarTodo();
+		assertEquals(0, funciones.display.length());
+	}
+	
+	@Test
+	void primerAdicion() {
+		Operations funciones = new Operations();
+		funciones.addValor("+");						//No se puede agregar operadores ni comas
+		funciones.addValor("/");						//como primer operando, por lo que el display
+		funciones.addValor(".");						//esta vacio.
+		assertEquals(0, funciones.display.length());	
+	}
+	@Test
+	void comas() {
+		Operations funciones = new Operations();		
+		funciones.addValor("1");						//No es posible concatenar mas de una coma
+		funciones.addValor(".");						
+		assertEquals(false, funciones.addValor("."));	
+	}
+	
+	@Test
+	void operadorAlFinal() {
+		Operations funciones = new Operations();
+		funciones.addValor("1");
+		funciones.addValor("0");
+		funciones.addValor("+");
+		assertFalse(funciones.calcular());
+	}
+	
+	@Test
+	void comaAlFinal() {
+		Operations funciones = new Operations();
+		funciones.addValor("1");
+		funciones.addValor("0");
+		funciones.addValor("+");
+		funciones.addValor("1");
+		funciones.addValor(".");
+		assertFalse(funciones.calcular());
+	}
+	
+	@Test
+	void memoriaVacia(){
+		Operations funciones = new Operations();		//No permite guardar memoria en caso de estar
+		assertEquals(false, funciones.guardaMemoria());	//vacio.
+	}
+	
+	@Test
+	void agregaMemoria() {
+		Operations funciones = new Operations();
+		funciones.addValor("1");
+		funciones.addValor("2");
+		funciones.guardaMemoria();
+		funciones.addValor("+");
+		funciones.agregaMemo();
+		funciones.calcular();
+		assertEquals("24", funciones.resultado.toString());
+	}
+	
+	@Test
+	void operandoYComa() {
+		Operations funciones = new Operations();		
+		funciones.addValor("1");						//No es posible concatenar operadores despues de
+		funciones.addValor(".");						//de una coma.
+		assertEquals(false, funciones.addValor("+"));
+	}
+	
 	
 }

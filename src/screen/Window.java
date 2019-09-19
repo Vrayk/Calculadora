@@ -192,8 +192,14 @@ public class Window {
 		frame.getContentPane().add(bTnMAdd);
 		bTnMAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				funciones.agregaMemo();
-				visor();
+				if(!funciones.memoriaDisponible) {
+					funciones.agregaMemo();
+					visor();
+				}
+				else {
+					visor();
+					resultado.setText("0");
+				}
 			}
 		});
 		JButton bTnMRemove = new JButton("M-");
